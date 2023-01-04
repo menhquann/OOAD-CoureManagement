@@ -1,0 +1,53 @@
+﻿@model List<Course>;
+@{
+    ViewData["Title"] = "Course Page";
+    var courses = Model;
+    var categories = ViewBag.Categories;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Course Management</h1>
+    
+    <table class="table table-stripd table-hover">
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Summary</th>
+            <th>Detail</th>
+            <th>Category</th>
+            <th>Slug</th>
+            <th>Avatar</th>
+            <th>
+                <a href="/Course/Create" class="btn btn-primary">Create</a>
+            </th>
+        </thead>
+        <tbody>
+            @foreach (var course in courses)
+            {
+                <tr>
+                    <td>@course.Id</td>
+                    <td>@course.Name</td>
+                    <td>@course.Summary</td>
+                    <td>@course.Detail</td>  
+                    @* @foreach (var category in categories)
+                    {
+                        @if (course.CategoryId == category.Id) 
+                        {
+                            <td>@category.Name</td>
+                        }  
+                    } *@
+                    <td>@course.Category.Name</td>
+                    <td>@course.Slug</td>
+                    <td>
+                        <img src=@course.Avatar alt="" border=3 height=100 width=100></img>
+                    </td>
+                    
+                    <td>
+                        <a href="/Course/Update?id=@course.Id" class="btn btn-success">Update</a>
+                        <a href="/Course/Delete?id=@course.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
